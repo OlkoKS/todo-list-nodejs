@@ -74,8 +74,8 @@ async function addTodo(event) {
 }
 
 async function setChecking(event) {
-    if (event.target.tagName === 'INPUT') {
-        const todoItem = event.target.parentElement;
+    if (event.target.closest('input')) {
+        const todoItem = event.target.closest('li');
         const todoItemId = todoItem.id;
         let updatedTodo = {};
 
@@ -99,10 +99,8 @@ async function setChecking(event) {
 }
 
 async function deleteTodo(event) {
-    console.log(event.target.tagName);
-    if (event.target.tagName === 'BUTTON') {
-        const todoId = event.target.parentElement.id;
-        console.log(todoId);
+    if (event.target.closest('button')) {
+        const todoId = event.target.closest('li').id;
 
         try {
             const res = await fetch(`http://localhost:3002/todos/${todoId}`, {
